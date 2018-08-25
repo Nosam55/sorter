@@ -1,0 +1,28 @@
+<HTML>
+    <head>
+        <title>Sort Visualizer</title>
+        <script src="sorter.js"></script>
+        <link rel="stylesheet" type="text/css" href="index.css">
+    </head>
+    <body onload="populateBars()">
+        <div id="main-container">
+            <span id="bars-container"></span>
+            <span id="control-panel">
+                <button onclick="multiShuffle(100)">Shuffle</button>
+                <button onclick="selectionSort()">Selection Sort</button>
+                <button onclick="insertionSort()">Insertion Sort</button>
+                <button onclick="bubbleSort()">Bubble Sort</button>
+                <button onclick="countSort()">Count Sort</button>
+                <select id="num-bars" onchange="onNumChange(this)">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="500">500</option>
+                    <option value="1000">1000</option>
+                </select>
+                <button onclick="checkSorted()">Is Sorted?</button>
+                <div id="sort-msg"></div>
+            </span>
+        </div>
+    </body>
+</HTML>

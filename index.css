@@ -1,0 +1,14 @@
+body{
+    background-color: #8899FF;
+}
+.bar{
+    background-color: #00FF00;
+    display: inline-block;
+}
+#main-container{
+    display: block;
+}
+
+#bars-container{
+    
+}
