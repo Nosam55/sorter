@@ -17,9 +17,10 @@ function checkSorted(){
         if(getHeight(bList[i]) < getHeight(bList[i-1])){
             msg.innerHTML = "Unsorted";
             console.log("fell");
-            break;
+            return false;
         }
     }
+    return true;
 }
 
 function populateBars() {
@@ -49,7 +50,7 @@ function shuffleBars() {
     for(let i = 0; i < nList.length; ++i){
         bContainer.appendChild(nList[i]);
     }
-    
+
 }
 
 async function multiShuffle(num){
@@ -62,9 +63,9 @@ async function multiShuffle(num){
 async function insertionSort() {
     var bContainer = document.getElementById("bars-container"),
         bList = Array.from(bContainer.children);
-    
+
     for(let i = 1; i < bList.length; ++i){
-        
+
         let curr = bList[i],
             n = 1,
             oldColor = window.getComputedStyle(curr).backgroundColor;
@@ -76,7 +77,7 @@ async function insertionSort() {
             await sleep(1).then(redrawBars(bContainer, bList));
         }
         curr.style.backgroundColor = oldColor;
-        
+
     }
 }
 
@@ -84,7 +85,7 @@ async function selectionSort(){
     var bContainer = document.getElementById("bars-container"),
         bList = Array.from(bContainer.children),
         firstUnsort = 0;
-    
+
     while(firstUnsort < bList.length){
         let min = firstUnsort,
             temp, oldMinColor, oldUnsortColor;
@@ -92,26 +93,26 @@ async function selectionSort(){
             if(getHeight(bList[i]) < getHeight(bList[min])){
                 min = i;
             }
-                
+
         }
         temp = bList[firstUnsort];
         bList[firstUnsort] = bList[min];
         bList[min] = temp;
-        
+
         oldMinColor = window.getComputedStyle(bList[min]).backgroundColor;
         oldUnsortColor = window.getComputedStyle(bList[firstUnsort]).backgroundColor;
-        
+
         bList[min].style.backgroundColor = ACTIVE_COLOR;
         bList[firstUnsort].style.backgroundColor = ACTIVE_COLOR;
-        
+
         await sleep(1).then(redrawBars(bContainer, bList));
-        
+
         bList[min].style.backgroundColor = oldMinColor;
         bList[firstUnsort].style.backgroundColor = oldUnsortColor;
-        
+
         firstUnsort++;
     }
-    
+
 }
 
 async function bubbleSort(){
@@ -122,22 +123,22 @@ async function bubbleSort(){
         isSorted = true;
         for(let i = 1; i < bList.length; ++i){
             if(getHeight(bList[i]) < getHeight(bList[i-1])){
-                
+
                 let temp = bList[i],
                     oldColorA = window.getComputedStyle(bList[i]).backgroundColor,
                     oldColorB = window.getComputedStyle(bList[i-1]).backgroundColor;
-                
+
                 bList[i] = bList[i-1];
                 bList[i-1] = temp;
-                
+
                 bList[i].style.backgroundColor = ACTIVE_COLOR;
                 bList[i-1].style.backgroundColor = ACTIVE_COLOR;
-                
+
                 await sleep(1).then(redrawBars(bContainer, bList));
-                
+
                 bList[i].style.backgroundColor = oldColorA;
                 bList[i-1].style.backgroundColor = oldColorB;
-                
+
                 isSorted = false;
             }
         }
@@ -174,8 +175,35 @@ async function countSort(){
     }
 }
 
-async function mergeSort(){
+function mergeSort(){
+    var bContainer = document.getElementById("bars-container"),
+        bList = Array.from(bContainer.children);
     
+
+}
+
+function __merge__(bList, begin, end, begin2, end2){
+    var tempArr = [],
+        n = 0;
+    const origBegin = begin;
+    
+    while(begin < end && begin2 < end2){
+        let elem;
+        if(bList[begin] < bList[begin2]){
+            tempArr[n++] = bList[begin++];
+        }
+        else{
+            tempArr[n++] = bList[begin2++];
+        }
+    }
+    while(begin < end){
+        tempArr[n++] = bList[begin++];
+    }
+     while(begin2 < end2){
+        tempArr[n++] = bList[begin2++];
+    }
+    
+    return tempArr;
 }
 
 function redrawBars(bContainer, bList){

@@ -2,6 +2,7 @@
     <head>
         <title>Sort Visualizer</title>
         <script src="sorter.js"></script>
+        <script src="timer.js"></script>
         <link rel="stylesheet" type="text/css" href="index.css">
     </head>
     <body onload="populateBars()">
@@ -9,10 +10,11 @@
             <span id="bars-container"></span>
             <span id="control-panel">
                 <button onclick="multiShuffle(100)">Shuffle</button>
-                <button onclick="selectionSort()">Selection Sort</button>
-                <button onclick="insertionSort()">Insertion Sort</button>
-                <button onclick="bubbleSort()">Bubble Sort</button>
-                <button onclick="countSort()">Count Sort</button>
+                <button onclick="timeSort(selectionSort)">Selection Sort</button>
+                <button onclick="timeSort(insertionSort)">Insertion Sort</button>
+                <button onclick="timeSort(bubbleSort)">Bubble Sort</button>
+                <button onclick="timeSort(countSort)">Count Sort</button>
+                <button onclick="gravitySort()">Gravity Sort</button>
                 <select id="num-bars" onchange="onNumChange(this)">
                     <option value="50">50</option>
                     <option value="100">100</option>
